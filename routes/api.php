@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GalleriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,5 +27,12 @@ Route::controller(AuthController::class)->group(
         Route::post('/refresh', 'refresh');
         Route::post('/me', 'getActiveUser');
         Route::post('/logout', 'logout');
+    }
+);
+
+Route::controller(GalleriesController::class)->group(
+    function () {
+        Route::get('/galleries', 'index');
+        Route::get('/galleries/{id}', 'show');
     }
 );
