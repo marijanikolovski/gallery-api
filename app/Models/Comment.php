@@ -14,4 +14,14 @@ class Comment extends Model
         'gallery_id',
         'content'
     ];
+
+    public function gallery()
+    {
+        return $this->belongsTo(Gallery::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
