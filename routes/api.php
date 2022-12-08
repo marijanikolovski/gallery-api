@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GalleriesController;
+use App\Http\Controllers\CommentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,8 +35,15 @@ Route::controller(GalleriesController::class)->group(
     function () {
         Route::get('/galleries', 'index');
         Route::get('/galleries/{id}', 'show');
-        Route::post('/create', 'store');
+        Route::post('/galleries', 'store');
         Route::put('/galleries/{id}', 'update');
         Route::delete('/galleries/{id}', 'destroy');
+    }
+);
+
+Route::controller(CommentsController::class)->group(
+    function () {
+        Route::post('galleries/{id}/comments', 'store');
+        Route::delete('comments/{id}', 'destroy');
     }
 );
