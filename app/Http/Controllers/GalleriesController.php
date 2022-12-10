@@ -12,10 +12,12 @@ use App\Http\Requests\EditGalleryRequest;
 
 class GalleriesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $query = Gallery::with('comments', 'user', 'images');
-        $galleries = $query->orderBy('id', 'desc')->paginate(10);
+        $term = $request->query('term', '');
+        $userId = $request->query('userId', '');
+
+        $galleries = Gallery::searchByTerm($term, $userId)->orderBy('id', 'desc')->paginate(10);
 
         return response()->json($galleries);
     }
